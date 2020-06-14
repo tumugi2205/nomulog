@@ -1,0 +1,108 @@
+.loading{
+    font-size: 5rem;
+    text-align: center;
+    margin: auto;
+    width: 40%;
+}
+.blog_body{
+    width: 80%;
+    margin: auto;
+}.text_side{
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    margin-top: 3%;
+    margin-left: 3%;
+}
+.view_side{
+    overflow-y: scroll;
+    display:inline-block;
+    width: 45%;
+    height: 55rem;
+    vertical-align: top;
+    margin-top: 3%;
+    margin-left: 3%;
+}
+.textarea{
+    font-size: 1rem;
+    width: 90%;
+    height: 55rem;
+    font-family:"Meiryo"; 
+}
+
+
+h1{
+    font-size: 3rem;
+    width: auto;
+}
+
+div{
+    font-size: 1.5rem;
+}
+
+h1::after,
+h2::after{
+    content: '';
+    display: block;
+    height: 1px;
+    margin-left: -16px;
+    background: linear-gradient(to right, #000, rgb(240, 240, 240));
+  }
+
+    
+code{
+    border: solid .1rem rgb(155, 155, 155);
+    background-color: rgb(255, 255, 255);
+    border-radius: .25rem;
+    padding-right: .25rem;
+    padding-left: .25rem;
+}
+
+pre code{
+    border: solid 0rem rgb(155, 155, 155);
+    background-color: rgb(255, 255, 255);
+    border-radius: 0rem;
+    padding: 0rem;
+    margin: 0rem;
+}
+pre{
+    font-size: 1.2rem;
+    border: solid .1rem rgb(155, 155, 155);
+    border-radius: .25rem;
+    padding: .8rem!important;
+    overflow-x: auto!important;
+}
+
+a{
+    color: blueviolet;
+}
+
+ul{
+    list-style-type:none;
+    border: solid .1rem rgb(155, 155, 155);
+    background-color: rgb(255, 255, 255);
+    border-radius: .25rem;
+    padding: .75rem;
+}
+
+ul li::before{
+    content: "»";
+    margin-right: 1rem;
+}
+ul li{
+    margin: 0%;
+    padding-inline-start: .25rem;
+}
+
+ol{
+    border: solid .1rem rgb(155, 155, 155);
+    background-color: rgb(255, 255, 255);
+    border-radius: .25rem;
+    padding: .75rem;
+    padding-left: 2.5rem;
+}
+
+ol li{
+    margin: 0%;
+    padding-inline-start: .25rem;
+}

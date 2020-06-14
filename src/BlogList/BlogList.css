@@ -1,0 +1,33 @@
+a{
+    text-decoration: none;
+}
+
+.block_list{
+    margin: auto;
+    width: 75%;
+}
+@media screen and (max-width: 850px) {
+    .block_list {
+        width: 90%;
+    }
+}
+
+.blog_block{
+    color: black;
+    background-color: rgb(255, 255, 255);
+    border: solid .1rem black;
+    border-radius: .5rem;
+    margin: .75rem ;
+    padding: 1rem;
+    
+}
+
+.blog_block__title{
+    font-weight: 900;
+    font-size: 2rem;
+}
+.blog_block__created_at{
+    font-size: 1rem;
+    text-align: right;
+    margin-top: .25rem;
+}
