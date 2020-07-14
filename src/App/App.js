@@ -4,7 +4,7 @@ import Title from '../Title/Title';
 import BlogList from '../BlogList/BlogList';
 import Items from '../Items/Items';
 import axios from 'axios';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter, Router, Route } from 'react-router-dom';
 
 const App = () => {
     const [blogList, setBlogList] = useState()
@@ -19,11 +19,11 @@ const App = () => {
     console.log("load")
     return (
         <>
-        <Router>
+        <HashRouter>
             <Title/>
                 <Route path='/' exact render={() => <BlogList data={blogList}/>}/>
                 <Route path='/blog_item/:id' exact component={Items}/>
-        </Router>
+        </HashRouter>
         </>
         );
 
