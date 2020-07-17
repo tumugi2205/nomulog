@@ -1,0 +1,27 @@
+
+.news__title{
+    font-size: 3rem;
+}
+
+.news__body li .time{
+    font-size: 1rem;
+}
+.news__body li .summary{
+    padding-left: 1rem;
+    font-size: 20px;
+}
+
+.news__body{
+    background-color: white;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    height: 10rem;
+    overflow-y: scroll;
+}
+.news__body li{
+    list-style-type:none;
+}
+.news__body li::before{
+    content: "»";
+    margin-right: .5rem;
+}

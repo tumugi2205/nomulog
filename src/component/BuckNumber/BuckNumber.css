@@ -1,0 +1,13 @@
+.buck_number{
+    margin-left: .5rem;
+    margin-top: 5rem;
+}
+
+.buck_number__body{
+    padding-top: .5rem;
+    padding-left: .5rem;
+}
+.buck_number__body span{
+    font-size: 20px;
+    display: block;
+}

@@ -5,12 +5,9 @@ import useReactRouter from 'use-react-router';
 
 const BlogList = ({ data }) => {
   const { match , location, history } = useReactRouter();
-  console.log(match)
-  console.log(location)
-  console.log(history)
   return (
     <>
-      {!data && <h1>Loading...</h1>}
+      {!data && <div className="loading_icon"><div className="dot-pulse"></div></div>}
       {data &&
         data.map((d, i) => {
           return (
