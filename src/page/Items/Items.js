@@ -17,10 +17,10 @@ const PrismRender = ({value, language}) => (
 
 const Items = () => {
   const { match } = useReactRouter();
-  const id = match.params.id
+  const blog_id = match.params.id
   var [itemInit, setitemInit] = useState('<div className="loading_icon"><div className="dot-pulse"></div></div>')
   useEffect(()=>{
-    axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogData', {"id":id})
+    axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogData', {"id":blog_id})
     .then((response) => {
       setitemInit(response.data.body)
     });

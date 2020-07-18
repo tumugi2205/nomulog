@@ -11,7 +11,7 @@ import axios from 'axios';
 const Articles = () => {
   const [blogList, setBlogList] = useState()
   useEffect(()=>{
-      axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogList', {})
+      axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogList', {"blog_type": "blog"})
       .then((response) => {
           setBlogList(response.data.body)
       });

@@ -1,22 +1,19 @@
 import React, {useState, useEffect} from "react"
-import './Home.css';
+import './Diarys.css';
 import Header from '../../component/Header/Header';
-import News from '../../component/News/News'
 import Tags from '../../component/Tags/Tags'
 import Footer from '../../component/Footer/Footer'
 import BuckNumber from '../../component/BuckNumber/BuckNumber'
-import Pickup from '../../component/Pickup/Pickup'
+import BlogList from '../../component/BlogList/BlogList'
 import Twitter from '../../component/Twitter/Twitter'
 import axios from 'axios';
-import { Link } from 'react-router-dom'
 
-const Home = () => {
+const Diarys = () => {
   const [blogList, setBlogList] = useState()
   useEffect(()=>{
-      axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogList', {"blog_type": "all"})
+      axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogList', {"blog_type": "diary"})
       .then((response) => {
           setBlogList(response.data.body)
-          console.log("in")
       });
   },[])
     return(
@@ -24,8 +21,7 @@ const Home = () => {
         <Header/>
         <div className="body">
           <div className="main_board">
-              <News/>
-              <Pickup  data={blogList}/>
+              <BlogList  data={blogList}/>
           </div>
           <div className="menu_board">
             <div className="menu_fix">
@@ -40,4 +36,5 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Diarys;
+

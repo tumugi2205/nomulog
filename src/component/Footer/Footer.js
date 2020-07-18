@@ -12,8 +12,11 @@ function Footer(){
           <Link to='#'>
             <div>About</div>
           </Link>
-          <Link to='/blog_list'>
+          <Link to='/articles'>
             <div>Articles</div>
+          </Link>
+          <Link to='/diarys'>
+            <div>Diary</div>
           </Link>
         </div>
         <div className="copyright">

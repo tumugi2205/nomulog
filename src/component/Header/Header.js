@@ -13,8 +13,11 @@ function Header(){
             <Link to='#'>
               <div className="blog_about">ABOUT</div>
             </Link>
-            <Link to='/blog_list'>
+            <Link to='/articles'>
               <div className="blog_articles">ARTICLES</div>
+            </Link>
+            <Link to='/diarys'>
+              <div className="blog_diarys">DIARYS</div>
             </Link>
               <div className="blog_search"><i className="fa fa-search" /><input type="text"/></div>
           </div>
