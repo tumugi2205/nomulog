@@ -4,3 +4,12 @@
 .pickup__title{
     font-size: 3rem;
 }
+
+@media screen and (max-width: 850px) {
+    .pickup{
+        margin-top: 2rem;
+    }
+    .pickup__title{
+        font-size: 3rem;
+    }
+}

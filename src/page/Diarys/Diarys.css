@@ -29,15 +29,7 @@ a{
     padding-bottom: .5rem;
     
 }
-.blog_block__title{
-	color: rgb(40, 40, 40);
-    font-weight: 900;
-    font-size: 26px;
-}
-.blog_block__summary{
-	color: rgb(90, 90, 90);
-    font-size: 20px;
-}
+
 .blog_block__tags{
 	color: rgb(90, 90, 90);
     font-size: 1rem;

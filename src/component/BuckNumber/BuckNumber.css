@@ -11,3 +11,8 @@
     font-size: 20px;
     display: block;
 }
+@media screen and (max-width: 850px) {
+    .buck_number{
+        display: none;
+    }
+}

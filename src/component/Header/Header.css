@@ -88,9 +88,34 @@ header .blog_title{
 }
 
 @media screen and (max-width: 850px) {
-header .blog_title{
-        font-size: 6rem;
-        margin: auto;
-        text-align: center;
-    }
+	header{
+		padding-bottom: .25rem;
+		border-bottom: solid 2px rgb(200, 200, 200);
+		display: block;
+		width: 100%;
+	}
+	.blog_search{
+		display: none;
+	}
+	.blog_title{
+		text-align: center;
+		margin-left: 0 !important;
+		margin-bottom: 0rem;
+		margin-top: auto;
+		font-size: 3rem;
+		color: black;
+		font-family:'メイリオ', 'Meiryo', sans-serif;
+		font-weight: 900;
+	}
+	.header__tags{
+		justify-content: center;
+		flex-wrap: wrap;
+		display: flex;
+		margin-top: .25rem;
+	}
+	header a:first-child{
+		margin: 0rem !important;
+		margin-bottom: 0rem;
+		margin-top: auto;
+	}
 }

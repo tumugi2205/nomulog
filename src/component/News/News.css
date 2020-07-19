@@ -25,3 +25,21 @@
     content: "»";
     margin-right: .5rem;
 }
+
+@media screen and (max-width: 850px) {
+    
+.news__body li .time{
+    font-size: 14px;
+}
+.news__body li .summary{
+    padding-left: 1rem;
+    font-size: 16px;
+}
+.news__body li{
+    list-style-type:none;
+}
+.news__body li::before{
+    content: "»";
+    margin-right: .5rem;
+}
+}
