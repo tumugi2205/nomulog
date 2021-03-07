@@ -25,31 +25,12 @@ const Items = () => {
       setitemInit(response.data.body)
     });
   },[])
-  console.log("load")
   return (
-    <div className="blog_body">
-      {/* <div dangerouslySetInnerHTML={{__html: itemInit}}/> */}
-      <>
-        <Header/>
-        <div className="body">
-          <div className="main_board">
-          <ReactMarkdown
-            source={itemInit}
-            escapeHtml={false}
-            renderers={{code: PrismRender}} 
-          />
-          </div>
-          <div className="menu_board">
-            <div className="menu_fix">
-              <Tags/>
-              <BuckNumber/>
-              <Twitter/>
-            </div>
-          </div>
-        </div>
-        <Footer/>
-      </>
-    </div>
+    <ReactMarkdown
+      source={itemInit}
+      escapeHtml={false}
+      renderers={{code: PrismRender}} 
+    />
     );
 }
 
