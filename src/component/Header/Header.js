@@ -23,8 +23,9 @@ function Header({ setflag }){
             <Link to='#/diary'>
               <div className="blog_diarys" onClick={()=>{setflag("diary")}}>DIARYS</div>
             </Link>
-            <Link to='#/umamusu'>
-              <div className="umamusu" onClick={()=>{setflag("umamusu")}}>ウマ娘</div>
+            <Link to='/umamusu'>
+              {/* <div className="umamusu" onClick={()=>{setflag("umamusu")}}>ウマ娘</div> */}
+              <div className="umamusu">ウマ娘</div>
             </Link>
               <div className="blog_search"><i className="fa fa-search" /><input type="text"/></div>
           </div>

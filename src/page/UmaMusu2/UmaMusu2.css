@@ -1,0 +1,89 @@
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.child{
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center;
+}
+.parent{
+    display: flex;
+    justify-content: center;
+}
+
+.parent > div:not(:last-child){
+    margin-right: 25vh;
+}
+.grand_parent{
+    display: flex;
+    justify-content: center;
+}
+.grand_parent > div:not(:last-child){
+    margin-right: 10vh;
+}
+
+
+.drop_data{
+    margin-top: 10vh;
+    width: 100%;
+}
+
+.uma_image{
+    width: 10vh;
+    height: 10vh; 
+}
+
+
+
+
+.lineage_block > div > div > img{
+    margin-top: -2.5vh !important;
+    margin-left: -2.5vh !important;
+}
+
+.ME, .MO, .FA, .gmMO, .gmFA, .gfMO, .gfFA{
+    border: 1px solid black;
+    width: 5vh;
+    height: 5vh; 
+}
+
+hr{
+    margin-top: -.1vh;
+    margin-bottom: -.1vh;
+}
+
+.border{
+    display: flex;
+    justify-content: center;
+}
+.top_bar, .top_bar2{
+    width: 0vh;
+    height:5vh;
+    border-color: black;
+}
+
+.var_bar{
+    width: 30vh;
+    height:0vh;
+    border-color: black;
+}
+
+.var_bar2{
+    width: 15vh;
+    height:0vh;
+    border-color: black;
+}
+
+.border > .top_bar:not(:last-child){
+    margin-right: 20vh;
+}
+
+.border > .top_bar2:not(:last-child){
+    margin-right: 12.5vh;
+}
+.border > .var_bar2:not(:last-child){
+    margin-right: 12.5vh;
+}

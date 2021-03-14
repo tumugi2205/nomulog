@@ -10,7 +10,6 @@ import Pickup from '../../component/Pickup/Pickup'
 import Twitter from '../../component/Twitter/Twitter'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-import UmaMusu from '../../component/UmaMusu/UmaMusu'
 
 
 
@@ -34,9 +33,6 @@ const Home = () => {
             </>
           )
       });
-    }
-    else if(flag == "umamusu"){
-      setboardData(<UmaMusu/>)
     }
     else{
       axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogList', {"blog_type": flag})
