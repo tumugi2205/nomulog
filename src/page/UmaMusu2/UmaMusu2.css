@@ -86,6 +86,11 @@ hr{
     height:0px;
 }
 
+.point_view{
+    font-size: 2rem;
+}
+
+
 @media screen and (max-width: 1400px) {
     
 .lineage_block > div > div > img{

@@ -30,6 +30,8 @@ export default function UmaMusu2() {
 
   return (
     <Layout>
+    <div>ウマ娘相性確認！</div>
+    <div className="point_view">相性：{lineageIcon}({lineage})</div>
     <DndProvider backend={selectBackend()}>
       <div className="lineage_block">
           <div className="child">
