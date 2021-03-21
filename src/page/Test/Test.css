@@ -1,0 +1,17 @@
+.App{
+    margin-left: 25rem;
+}
+
+.drag{
+    margin:3rem;
+    background-color: black;
+    width: 5vh;
+    height: 5vh;
+}
+
+.drop_area{
+    margin:3rem;
+    border: 1px solid black;
+    width: 10vh;
+    height: 10vh;
+}

@@ -8,6 +8,7 @@ import Footer from '../../component/Footer/Footer'
 import BuckNumber from '../../component/BuckNumber/BuckNumber'
 import Pickup from '../../component/Pickup/Pickup'
 import Twitter from '../../component/Twitter/Twitter'
+import Layout from '../../component/Layout/Layout'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
@@ -44,23 +45,9 @@ const Home = () => {
   } ,[flag])
 
     return(
-      <>
-        <Header setflag={setflag}/>
-        <div className="body">
-          <div className="main_board">
-            {/* ここをステートで管理する */}
-            {boardData}
-          </div>
-          <div className="menu_board">
-            <div className="menu_fix">
-              <Tags/>
-              <BuckNumber/>
-              <Twitter/>
-            </div>
-          </div>
-        </div>
-        <Footer/>
-      </>
+      <Layout>
+      {boardData}
+      </Layout>
     )
 }
 

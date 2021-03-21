@@ -27,7 +27,7 @@ form{
 
 
 .drop_data{
-    margin-top: 10vh;
+    margin-top: 3vh;
     width: 100%;
 }
 
@@ -35,7 +35,9 @@ form{
     width: 10vh;
     height: 10vh; 
 }
-
+#input_point{
+    margin-top: 7vh;
+}
 
 
 
@@ -53,6 +55,7 @@ form{
 hr{
     margin-top: -.1vh;
     margin-bottom: -.1vh;
+    z-index: -1;
 }
 
 .border{

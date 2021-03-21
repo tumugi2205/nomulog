@@ -5,10 +5,8 @@ import Items from '../Items/Items';
 import UmaMusu2 from '../UmaMusu2/UmaMusu2'
 import { HashRouter, Router, Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-
-const App = () => {
+export default function App(){
     return (
-        <>
         <BrowserRouter>
             <Switch>
                 <Route path='/' exact component={Home}/>
@@ -16,9 +14,5 @@ const App = () => {
                 <Route path='/umamusu' exact component={UmaMusu2}/>
             </Switch>
         </BrowserRouter>
-        </>
         );
-
 }
-
-export default App;
