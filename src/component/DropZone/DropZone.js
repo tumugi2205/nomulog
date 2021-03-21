@@ -1,38 +1,32 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import { useDrop, DropTarget } from 'react-dnd'
 
 
-export default function DropZone({ areaName, update_form_item, setFormData, formData }) {
-    const [{ getItem }, drop] = useDrop(() => ({
+export default function DropZone({ areaName, formData, updateFormItem }) {
+    const [_, dropRef] = useDrop(() => ({
       accept: "UmaItem",
-      drop: () => update_and_compute(),
-      collect: monitor => ({
-        getItem: monitor,
-      }),
+      drop: (item) => {
+        updateFormItem(areaName, item.id)
+      }
     }))
 
-    function update_and_compute(){
-        const data = update_form_item(areaName, getItem.getItem())
-    }
-
-    let umaname = ""
-    if(getItem.getItem() != null){
-        umaname = getItem.getItem().id
-    }
+    const umaName = useMemo(() => {
+      return formData[areaName]
+    }, [formData, areaName])
 
     return (
       <div
-        ref={drop}
+        ref={dropRef}
         className={areaName}
       >
-
-    <img 
-      className="uma_image" 
-      id={umaname} 
-      src={`./images/${formData[areaName]}.png`} 
-      value={umaname} 
-      draggable="true" 
-      key={umaname}/>
+        <img 
+          className="uma_image" 
+          id={umaName} 
+          src={`./images/${umaName}.png`} 
+          value={umaName} 
+          draggable="true" 
+          key={umaName}
+        />
       </div>
     )
   }

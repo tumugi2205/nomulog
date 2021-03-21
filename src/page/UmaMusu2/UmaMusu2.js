@@ -11,116 +11,66 @@ import { TouchBackend } from 'react-dnd-touch-backend'
 
 // ___________
 //
-
-
 export default function UmaMusu2() {
   const [formData, setFormData] = useState(initFormData);
   const [lineage, setLineage] = useState(6);
-  const [lineage_icon, setLineage_icon] = useState("△");
+  const [lineageIcon, setLineageIcon] = useState("△");
 
-  function update_form_item(key, e){
-    console.log(formData)
-    const data = { ...formData, [key]: e.id }
-    const lineage = {
-      mother: {
-        name: data.MO,
-        mother: { name: data.gmMO },
-        father: { name: data.gmFA },
-        lineage_point: 0,
-        factor_point: data.mPOINT,
-      },
-      father: {
-        name: data.FA,
-        mother: { name: data.gfMO },
-        father: { name: data.gfFA },
-        lineage_point: 0,
-        factor_point: data.fPOINT,
-      },
-      name: data.ME,
-      lineage_point: 0,
-      factor_point: data.POINT,
-    };
-    lineage["mother"]["lineage_point"] =
-      umaData[lineage["mother"]["name"]][lineage["mother"]["mother"]["name"]] +
-      umaData[lineage["mother"]["name"]][lineage["mother"]["father"]["name"]];
-    lineage["father"]["lineage_point"] =
-      umaData[lineage["father"]["name"]][lineage["father"]["mother"]["name"]] +
-      umaData[lineage["father"]["name"]][lineage["father"]["father"]["name"]];
-    lineage["lineage_point"] =
-      umaData[lineage["name"]][lineage["mother"]["name"]] +
-      umaData[lineage["name"]][lineage["father"]["name"]];
-    const tortal_lineage_point =
-      lineage["mother"]["lineage_point"] +
-      lineage["father"]["lineage_point"] +
-      lineage["lineage_point"] +
-      umaData[lineage["mother"]["name"]][lineage["father"]["name"]];
-    const tortal_factor_point = 0;
-      // +lineage["mother"]["factor_point"] +
-      // +lineage["father"]["factor_point"] +
-      // +lineage["factor_point"];
-    
-      if(tortal_lineage_point + tortal_factor_point > 150){
-        setLineage_icon(<>◎</>)
-      }else if(tortal_lineage_point + tortal_factor_point > 50){
-        setLineage_icon(<>〇</>)
-      }else{
-        setLineage_icon(<>△</>)
-      }
-      console.log(data)
-      setFormData(data)
-    }
-  
-  let pic_umalist = []
-  umaNames.forEach(umaname => {
-    pic_umalist.push(<DragItem umaname={umaname}/>)
-  })
+  const updateFormItem = useCallback((key, umaName) => {
+    setFormData(prevData => {
+      const newFormData = {...prevData, [key]: umaName}
+      const {point, icon} = computeLineage(newFormData)
+      setLineage(point)
+      setLineageIcon(icon)
+      
+      return newFormData
+    })
 
-  
+  }, [])
 
   return (
     <Layout>
     <DndProvider backend={selectBackend()}>
-      
-    <div className="lineage_block">          
+      <div className="lineage_block">
           <div className="child">
-          <DropZone areaName = "ME"  update_form_item = {update_form_item} formData = {formData}/>
+          <DropZone areaName = "ME" updateFormItem={updateFormItem} formData = {formData} />
           </div>
-          <hr className="top_bar"/>
-          <hr className="var_bar"/>
+          <hr className="ver bottom"/>
+          <hr className="hol"/>
           <div className="border">
-            <hr className="top_bar"/>
-            <hr className="top_bar"/>
+            <hr className="ver"/>
+            <hr className="ver"/>
           </div>
 
           <div className="parent">
-          <DropZone areaName = "MO"  update_form_item = {update_form_item} formData = {formData} />
-          <DropZone areaName = "FA"  update_form_item = {update_form_item} formData = {formData} />
+          <DropZone areaName = "MO" updateFormItem={updateFormItem} formData = {formData}  />
+          <DropZone areaName = "FA" updateFormItem={updateFormItem} formData = {formData}  />
           </div>
           <div className="border">
-            <hr className="top_bar"/>
-            <hr className="top_bar"/>
+            <hr className="ver"/>
+            <hr className="ver"/>
           </div>
-          <div className="border">
-            <hr className="var_bar2"/>
-            <hr className="var_bar2"/>
+          <div className="hr_area">
+            <hr className="hol2"/>
+            <hr className="hol2"/>
           </div>
-          <div className="border">
-            <hr className="top_bar2"/>
-            <hr className="top_bar2"/>
-            <hr className="top_bar2"/>
-            <hr className="top_bar2"/>
+          <div className="hr_area">
+            <hr className="ver"/>
+            <hr className="ver"/>
+            <hr className="ver"/>
+            <hr className="ver"/>
           </div>
 
           <div className="grand_parent">
-          <DropZone areaName = "gmMO"  update_form_item = {update_form_item} formData = {formData} />
-          <DropZone areaName = "gmFA"  update_form_item = {update_form_item} formData = {formData} />
+          <DropZone areaName = "gmMO" updateFormItem={updateFormItem} formData = {formData}  />
+          <DropZone areaName = "gmFA" updateFormItem={updateFormItem} formData = {formData}  />
 
-            <DropZone areaName = "gfMO"  update_form_item = {update_form_item} formData = {formData} />
-          <DropZone areaName = "gfFA"  update_form_item = {update_form_item} formData = {formData} />
+          <DropZone areaName = "gfMO" updateFormItem={updateFormItem} formData = {formData}  />
+          <DropZone areaName = "gfFA" updateFormItem={updateFormItem} formData = {formData}  />
           </div>
         </div>
     <div className="drop_data" id="drop_data">
-      {pic_umalist}
+      {umaNames.map((name) => <DragItem key={name} umaname={name}/>)}
     </div>
     </DndProvider>
     </Layout>
@@ -130,6 +80,58 @@ export default function UmaMusu2() {
 
 // ___________
 //
+const computeLineage = (formData) => {
+  const lineage = {
+    mother: {
+      name: formData.MO,
+      mother: { name: formData.gmMO },
+      father: { name: formData.gmFA },
+      lineage_point: 0,
+      factor_point: formData.mPOINT,
+    },
+    father: {
+      name: formData.FA,
+      mother: { name: formData.gfMO },
+      father: { name: formData.gfFA },
+      lineage_point: 0,
+      factor_point: formData.fPOINT,
+    },
+    name: formData.ME,
+    lineage_point: 0,
+    factor_point: formData.POINT,
+  };
+  lineage["mother"]["lineage_point"] =
+    umaData[lineage["mother"]["name"]][lineage["mother"]["mother"]["name"]] +
+    umaData[lineage["mother"]["name"]][lineage["mother"]["father"]["name"]];
+  lineage["father"]["lineage_point"] =
+    umaData[lineage["father"]["name"]][lineage["father"]["mother"]["name"]] +
+    umaData[lineage["father"]["name"]][lineage["father"]["father"]["name"]];
+  lineage["lineage_point"] =
+    umaData[lineage["name"]][lineage["mother"]["name"]] +
+    umaData[lineage["name"]][lineage["father"]["name"]];
+  const tortal_lineage_point =
+    lineage["mother"]["lineage_point"] +
+    lineage["father"]["lineage_point"] +
+    lineage["lineage_point"] +
+    umaData[lineage["mother"]["name"]][lineage["father"]["name"]];
+  const tortal_factor_point = 0;
+    // +lineage["mother"]["factor_point"] +
+    // +lineage["father"]["factor_point"] +
+    // +lineage["factor_point"];
+  
+    
+  const lineagePoint = tortal_lineage_point + tortal_factor_point
+  let lineageIcon = ''
+  if(lineagePoint > 150){
+    lineageIcon = '◎'
+  } else if(lineagePoint > 50){
+    lineageIcon = '〇'
+  } else{
+    lineageIcon = '△'
+  }
+    
+  return {point: lineagePoint, icon: lineageIcon};
+};
 
 function selectBackend(){
   return (isAndroid() || isIOS()) ? TouchBackend : HTML5Backend
@@ -141,10 +143,6 @@ function isAndroid() {
 
 function isIOS() {
   return !!window.navigator.userAgent.match(/iPhone|iPad|iPod/);
-}
-
-function update_form(...data){
-
 }
 
 const initFormData = {
@@ -166,7 +164,7 @@ const umaData = {
   "アグネスタキオン": {
       "アグネスタキオン": 0,
       "ウイニングチケット": 24,
-      "ウオッカ": 25,
+      "ウォッカ": 25,
       "エアグルーヴ": 18,
       "エルコンドルパサー": 16,
       "オグリキャップ": 24,
@@ -196,7 +194,7 @@ const umaData = {
   "ウイニングチケット": {
       "アグネスタキオン": 26,
       "ウイニングチケット": 0,
-      "ウオッカ": 26,
+      "ウォッカ": 26,
       "エアグルーヴ": 19,
       "エルコンドルパサー": 18,
       "オグリキャップ": 28,
@@ -223,10 +221,10 @@ const umaData = {
       "ライスシャワー": 18,
       "": 0
   },
-  "ウオッカ": {
+  "ウォッカ": {
       "アグネスタキオン": 27,
       "ウイニングチケット": 26,
-      "ウオッカ": 0,
+      "ウォッカ": 0,
       "エアグルーヴ": 22,
       "エルコンドルパサー": 25,
       "オグリキャップ": 33,
@@ -256,7 +254,7 @@ const umaData = {
   "エアグルーヴ": {
       "アグネスタキオン": 20,
       "ウイニングチケット": 19,
-      "ウオッカ": 22,
+      "ウォッカ": 22,
       "エアグルーヴ": 0,
       "エルコンドルパサー": 25,
       "オグリキャップ": 18,
@@ -286,7 +284,7 @@ const umaData = {
   "エルコンドルパサー": {
       "アグネスタキオン": 18,
       "ウイニングチケット": 18,
-      "ウオッカ": 25,
+      "ウォッカ": 25,
       "エアグルーヴ": 25,
       "エルコンドルパサー": 0,
       "オグリキャップ": 25,
@@ -316,7 +314,7 @@ const umaData = {
   "オグリキャップ": {
       "アグネスタキオン": 26,
       "ウイニングチケット": 28,
-      "ウオッカ": 33,
+      "ウォッカ": 33,
       "エアグルーヴ": 18,
       "エルコンドルパサー": 25,
       "オグリキャップ": 0,
@@ -346,7 +344,7 @@ const umaData = {
   "キングヘイロー": {
       "アグネスタキオン": 21,
       "ウイニングチケット": 19,
-      "ウオッカ": 20,
+      "ウォッカ": 20,
       "エアグルーヴ": 14,
       "エルコンドルパサー": 15,
       "オグリキャップ": 19,
@@ -376,7 +374,7 @@ const umaData = {
   "グラスワンダー": {
       "アグネスタキオン": 25,
       "ウイニングチケット": 24,
-      "ウオッカ": 31,
+      "ウォッカ": 31,
       "エアグルーヴ": 18,
       "エルコンドルパサー": 35,
       "オグリキャップ": 32,
@@ -406,7 +404,7 @@ const umaData = {
   "ゴールドシップ": {
       "アグネスタキオン": 20,
       "ウイニングチケット": 22,
-      "ウオッカ": 18,
+      "ウォッカ": 18,
       "エアグルーヴ": 19,
       "エルコンドルパサー": 19,
       "オグリキャップ": 22,
@@ -436,7 +434,7 @@ const umaData = {
   "サイレンススズカ": {
       "アグネスタキオン": 20,
       "ウイニングチケット": 20,
-      "ウオッカ": 18,
+      "ウォッカ": 18,
       "エアグルーヴ": 20,
       "エルコンドルパサー": 19,
       "オグリキャップ": 20,
@@ -466,7 +464,7 @@ const umaData = {
   "サクラバクシンオー": {
       "アグネスタキオン": 11,
       "ウイニングチケット": 12,
-      "ウオッカ": 10,
+      "ウォッカ": 10,
       "エアグルーヴ": 19,
       "エルコンドルパサー": 19,
       "オグリキャップ": 11,
@@ -496,7 +494,7 @@ const umaData = {
   "シンボリルドルフ": {
       "アグネスタキオン": 20,
       "ウイニングチケット": 20,
-      "ウオッカ": 19,
+      "ウォッカ": 19,
       "エアグルーヴ": 27,
       "エルコンドルパサー": 29,
       "オグリキャップ": 19,
@@ -526,7 +524,7 @@ const umaData = {
   "スーパークリーク": {
       "アグネスタキオン": 20,
       "ウイニングチケット": 21,
-      "ウオッカ": 19,
+      "ウォッカ": 19,
       "エアグルーヴ": 27,
       "エルコンドルパサー": 25,
       "オグリキャップ": 26,
@@ -556,7 +554,7 @@ const umaData = {
   "スペシャルウィーク": {
       "アグネスタキオン": 27,
       "ウイニングチケット": 29,
-      "ウオッカ": 28,
+      "ウォッカ": 28,
       "エアグルーヴ": 20,
       "エルコンドルパサー": 25,
       "オグリキャップ": 27,
@@ -586,7 +584,7 @@ const umaData = {
   "タイキシャトル": {
       "アグネスタキオン": 11,
       "ウイニングチケット": 11,
-      "ウオッカ": 18,
+      "ウォッカ": 18,
       "エアグルーヴ": 18,
       "エルコンドルパサー": 29,
       "オグリキャップ": 20,
@@ -616,7 +614,7 @@ const umaData = {
   "ダイワスカーレット": {
       "アグネスタキオン": 19,
       "ウイニングチケット": 19,
-      "ウオッカ": 34,
+      "ウォッカ": 34,
       "エアグルーヴ": 29,
       "エルコンドルパサー": 32,
       "オグリキャップ": 26,
@@ -646,7 +644,7 @@ const umaData = {
   "テイエムオペラオー": {
       "アグネスタキオン": 21,
       "ウイニングチケット": 20,
-      "ウオッカ": 20,
+      "ウォッカ": 20,
       "エアグルーヴ": 26,
       "エルコンドルパサー": 26,
       "オグリキャップ": 22,
@@ -676,7 +674,7 @@ const umaData = {
   "トウカイテイオー": {
       "アグネスタキオン": 23,
       "ウイニングチケット": 21,
-      "ウオッカ": 24,
+      "ウォッカ": 24,
       "エアグルーヴ": 28,
       "エルコンドルパサー": 26,
       "オグリキャップ": 20,
@@ -706,7 +704,7 @@ const umaData = {
   "ナイスネイチャ": {
       "アグネスタキオン": 28,
       "ウイニングチケット": 27,
-      "ウオッカ": 26,
+      "ウォッカ": 26,
       "エアグルーヴ": 19,
       "エルコンドルパサー": 17,
       "オグリキャップ": 28,
@@ -736,7 +734,7 @@ const umaData = {
   "ハルウララ": {
       "アグネスタキオン": 5,
       "ウイニングチケット": 5,
-      "ウオッカ": 5,
+      "ウォッカ": 5,
       "エアグルーヴ": 5,
       "エルコンドルパサー": 2,
       "オグリキャップ": 5,
@@ -766,7 +764,7 @@ const umaData = {
   "マチカネフクキタル": {
       "アグネスタキオン": 27,
       "ウイニングチケット": 27,
-      "ウオッカ": 25,
+      "ウォッカ": 25,
       "エアグルーヴ": 19,
       "エルコンドルパサー": 18,
       "オグリキャップ": 27,
@@ -796,7 +794,7 @@ const umaData = {
   "マヤノトップガン": {
       "アグネスタキオン": 19,
       "ウイニングチケット": 22,
-      "ウオッカ": 18,
+      "ウォッカ": 18,
       "エアグルーヴ": 18,
       "エルコンドルパサー": 18,
       "オグリキャップ": 22,
@@ -826,7 +824,7 @@ const umaData = {
   "マルゼンスキー": {
       "アグネスタキオン": 12,
       "ウイニングチケット": 12,
-      "ウオッカ": 17,
+      "ウォッカ": 17,
       "エアグルーヴ": 11,
       "エルコンドルパサー": 19,
       "オグリキャップ": 18,
@@ -856,7 +854,7 @@ const umaData = {
   "ミホノブルボン": {
       "アグネスタキオン": 21,
       "ウイニングチケット": 20,
-      "ウオッカ": 27,
+      "ウォッカ": 27,
       "エアグルーヴ": 19,
       "エルコンドルパサー": 24,
       "オグリキャップ": 26,
@@ -886,7 +884,7 @@ const umaData = {
   "メジロマックイーン": {
       "アグネスタキオン": 21,
       "ウイニングチケット": 21,
-      "ウオッカ": 21,
+      "ウォッカ": 21,
       "エアグルーヴ": 27,
       "エルコンドルパサー": 24,
       "オグリキャップ": 20,
@@ -916,7 +914,7 @@ const umaData = {
   "メジロライアン": {
       "アグネスタキオン": 26,
       "ウイニングチケット": 25,
-      "ウオッカ": 24,
+      "ウォッカ": 24,
       "エアグルーヴ": 17,
       "エルコンドルパサー": 19,
       "オグリキャップ": 27,
@@ -946,7 +944,7 @@ const umaData = {
   "ライスシャワー": {
       "アグネスタキオン": 18,
       "ウイニングチケット": 18,
-      "ウオッカ": 17,
+      "ウォッカ": 17,
       "エアグルーヴ": 24,
       "エルコンドルパサー": 28,
       "オグリキャップ": 18,
@@ -976,7 +974,7 @@ const umaData = {
   "": {
       "アグネスタキオン": 0,
       "ウイニングチケット": 0,
-      "ウオッカ": 0,
+      "ウォッカ": 0,
       "エアグルーヴ": 0,
       "エルコンドルパサー": 0,
       "オグリキャップ": 0,
@@ -1024,7 +1022,7 @@ const umaNames = [
   "マヤノトップガン",
   "メジロライアン",
   "アグネスタキオン",
-  "ウィニングチケット",
+  "ウイニングチケット",
   "サクラバクシンオー",
   "スーパークリーク",
   "ハルウララ",

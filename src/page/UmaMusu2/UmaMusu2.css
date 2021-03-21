@@ -15,14 +15,14 @@ form{
 }
 
 .parent > div:not(:last-child){
-    margin-right: 25vh;
+    margin-right: 370px;
 }
 .grand_parent{
     display: flex;
     justify-content: center;
 }
 .grand_parent > div:not(:last-child){
-    margin-right: 10vh;
+    margin-right: 160px;
 }
 
 
@@ -42,51 +42,90 @@ form{
 
 
 .lineage_block > div > div > img{
-    margin-top: -2.5vh !important;
-    margin-left: -2.5vh !important;
+    margin-top: -22.5px !important;
+    margin-left: -22.5px !important;
 }
-
 .ME, .MO, .FA, .gmMO, .gmFA, .gfMO, .gfFA{
     border: 1px solid black;
-    width: 5vh;
-    height: 5vh; 
+    width: 50px;
+    height: 50px; 
 }
 
 hr{
-    margin-top: -.1vh;
-    margin-bottom: -.1vh;
+    border-color: black;
     z-index: -1;
+    margin-block: unset;
 }
 
 .border{
+    width: 425px;
+    margin: auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
-.top_bar, .top_bar2{
+.border > hr {
+    margin: 0px;
+}
+
+.ver{
     width: 0vh;
-    height:5vh;
-    border-color: black;
+    height:60px;
+}
+.hol{
+    width: 423px;
+    height:0px;
+}
+.hr_area{
+    width: 850px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.hol2{
+    width: 212px;
+    height:0px;
 }
 
-.var_bar{
-    width: 30vh;
-    height:0vh;
-    border-color: black;
+@media screen and (max-width: 1400px) {
+    
+.lineage_block > div > div > img{
+    margin-top: -13px !important;
+    margin-left: -13px !important;
+    width: 75px;
+    height: 75px;
 }
-
-.var_bar2{
-    width: 15vh;
-    height:0vh;
-    border-color: black;
-}
-
-.border > .top_bar:not(:last-child){
-    margin-right: 20vh;
-}
-
-.border > .top_bar2:not(:last-child){
-    margin-right: 12.5vh;
-}
-.border > .var_bar2:not(:last-child){
-    margin-right: 12.5vh;
+    .border{
+        width: 150px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .border > hr {
+        margin: 0px;
+    }
+    
+    .ver{
+        width: 0vh;
+        height:60px;
+    }
+    .hol{
+        width: 150px;
+        height:0px;
+    }
+    .hr_area{
+        width: 300px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .hol2{
+        width: 75px;
+        height:0px;
+    }
+    .parent > div:not(:last-child){
+        margin-right: 100px;
+    }
+    .grand_parent > div:not(:last-child){
+        margin-right: 30px;
+    }
 }
