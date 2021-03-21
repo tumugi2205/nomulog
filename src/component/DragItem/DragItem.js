@@ -2,7 +2,7 @@ import React from 'react'
 import { useDrag, DragPreviewImage} from 'react-dnd'
 
 export default function DragItem({umaname}) {
-  const [{isDragging}, drag, dragPreview] = useDrag(() => ({
+  const [{isDragging}, drag] = useDrag(() => ({
     type: 'UmaItem',
     item: {id:umaname},
     end: item => ({id:umaname}),
@@ -10,13 +10,9 @@ export default function DragItem({umaname}) {
       isDragging: !!monitor.isDragging()
     })
   }))
-  console.log({isDragging})
   
   return (
     <>
-      {/* <div style={!isDragging ? {display: 'none'}: {}} ref={dragPreview}>teststesst</div> */}
-      <DragPreviewImage src={`./images/${umaname}.png`} connect={dragPreview} />
-      {/* <div ref={connectDragSource}>🏠</div> */}
       <img 
       ref={drag}
       style={{
