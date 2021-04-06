@@ -1,4 +1,5 @@
 import React from 'react'
+import './DragItem.css'
 import { useDrag, DragPreviewImage} from 'react-dnd'
 
 export default function DragItem({umaname}) {

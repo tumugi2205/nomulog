@@ -2,11 +2,14 @@ import React, {useMemo} from 'react'
 import { useDrop, DropTarget } from 'react-dnd'
 
 
-export default function DropZone({ areaName, formData, updateFormItem }) {
+export default function DropZone({ areaName, formData, updateFormItem, sortUmaIcon }) {
     const [_, dropRef] = useDrop(() => ({
       accept: "UmaItem",
       drop: (item) => {
-        updateFormItem(areaName, item.id)
+      updateFormItem(areaName, item.id)
+        if(areaName == "ME"){
+          sortUmaIcon(item.id)
+        }
       }
     }))
 

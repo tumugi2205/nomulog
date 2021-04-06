@@ -13,8 +13,31 @@ import { TouchBackend } from 'react-dnd-touch-backend'
 //
 export default function UmaMusu2() {
   const [formData, setFormData] = useState(initFormData);
+  const [UmaList, setUmaList] = useState(umaNames.map((name) => <DragItem key={name} umaname={name}/>));
   const [lineage, setLineage] = useState(6);
   const [lineageIcon, setLineageIcon] = useState("△");
+
+  const sortUmaIcon = (umaname) =>{
+    let umalist = umaData[umaname];
+    console.log(umalist);
+    let res = Object.entries(umalist);
+    res.sort(function(p1, p2){
+      var p1Val = p1[1], p2Val = p2[1];
+      return p1Val - p2Val;
+    })
+    umalist = Object.fromEntries(res);
+    res = []
+    
+    Object.keys(umalist).forEach(key => res.push(key));
+    res = res.reverse()
+    console.log(res)
+    setUmaList(res.map((key) => {
+      if(key != ""){
+        return <DragItem key={key} umaname={key}/>
+      }
+    }
+    ))
+  }
 
   const updateFormItem = useCallback((key, umaName) => {
     setFormData(prevData => {
@@ -33,46 +56,48 @@ export default function UmaMusu2() {
     <div>ウマ娘相性確認！</div>
     <div className="point_view">相性：{lineageIcon}({lineage})</div>
     <DndProvider backend={selectBackend()}>
-      <div className="lineage_block">
-          <div className="child">
-          <DropZone areaName = "ME" updateFormItem={updateFormItem} formData = {formData} />
-          </div>
-          <hr className="ver bottom"/>
-          <hr className="hol"/>
-          <div className="border">
-            <hr className="ver"/>
-            <hr className="ver"/>
-          </div>
+    <div className="lineage_block">
+      <div className="child">
+      <DropZone areaName = "ME" updateFormItem={updateFormItem} formData = {formData} sortUmaIcon={sortUmaIcon} />
+      </div>
+      <hr className="ver bottom"/>
+      <hr className="hol"/>
+      <div className="border">
+        <hr className="ver"/>
+        <hr className="ver"/>
+      </div>
 
-          <div className="parent">
-          <DropZone areaName = "MO" updateFormItem={updateFormItem} formData = {formData}  />
-          <DropZone areaName = "FA" updateFormItem={updateFormItem} formData = {formData}  />
-          </div>
-          <div className="border">
-            <hr className="ver"/>
-            <hr className="ver"/>
-          </div>
-          <div className="hr_area">
-            <hr className="hol2"/>
-            <hr className="hol2"/>
-          </div>
-          <div className="hr_area">
-            <hr className="ver"/>
-            <hr className="ver"/>
-            <hr className="ver"/>
-            <hr className="ver"/>
-          </div>
+      <div className="parent">
+      <DropZone areaName = "MO" updateFormItem={updateFormItem} formData = {formData}  />
+      <DropZone areaName = "FA" updateFormItem={updateFormItem} formData = {formData}  />
+      </div>
+      <div className="border">
+        <hr className="ver"/>
+        <hr className="ver"/>
+      </div>
+      <div className="hr_area">
+        <hr className="hol2"/>
+        <hr className="hol2"/>
+      </div>
+      <div className="hr_area">
+        <hr className="ver"/>
+        <hr className="ver"/>
+        <hr className="ver"/>
+        <hr className="ver"/>
+      </div>
 
-          <div className="grand_parent">
-          <DropZone areaName = "gmMO" updateFormItem={updateFormItem} formData = {formData}  />
-          <DropZone areaName = "gmFA" updateFormItem={updateFormItem} formData = {formData}  />
+      <div className="grand_parent">
+      <DropZone areaName = "gmMO" updateFormItem={updateFormItem} formData = {formData}  />
+      <DropZone areaName = "gmFA" updateFormItem={updateFormItem} formData = {formData}  />
 
-          <DropZone areaName = "gfMO" updateFormItem={updateFormItem} formData = {formData}  />
-          <DropZone areaName = "gfFA" updateFormItem={updateFormItem} formData = {formData}  />
-          </div>
-        </div>
+      <DropZone areaName = "gfMO" updateFormItem={updateFormItem} formData = {formData}  />
+      <DropZone areaName = "gfFA" updateFormItem={updateFormItem} formData = {formData}  />
+      </div>
+    </div>
+   
+    <div className="discription">育成ウマ娘との相性順にソートされます。</div>
     <div className="drop_data" id="drop_data">
-      {umaNames.map((name) => <DragItem key={name} umaname={name}/>)}
+      {UmaList}
     </div>
     </DndProvider>
     </Layout>
@@ -82,6 +107,8 @@ export default function UmaMusu2() {
 
 // ___________
 //
+
+
 const computeLineage = (formData) => {
   const lineage = {
     mother: {
@@ -1031,4 +1058,7 @@ const umaNames = [
   "マチカネフクキタル",
   "ナイスネイチャ",
   "キングヘイロー",
+  "テイエムオペラオー",
+  "ミホノブルボン",
+  "ビワハヤヒデ"
 ];

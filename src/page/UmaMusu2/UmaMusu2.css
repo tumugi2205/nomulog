@@ -25,13 +25,19 @@ form{
     margin-right: 160px;
 }
 
-
+.discription{
+    margin-top: 5vh;
+}
 .drop_data{
-    margin-top: 3vh;
-    width: 100%;
+    white-space: nowrap;
+    max-height: 125px;
+    max-width: none;
+    overflow-y: hidden;
+    overflow-x: scroll;
 }
 
 .uma_image{
+    padding: 5px;
     width: 10vh;
     height: 10vh; 
 }

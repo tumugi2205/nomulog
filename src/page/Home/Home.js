@@ -22,31 +22,32 @@ const Home = () => {
     <News/>
     <Pickup data=""/>
     </>)
-  useEffect(()=>{
-    if(flag === "all"){
-      axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogList', {"blog_type": flag})
-      .then((response) => {
-          setBlogList(response.data.body)
-          setboardData(
-            <>
-            <News/>
-            <Pickup  data={response.data.body}/>
-            </>
-          )
-      });
-    }
-    else{
-      axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogList', {"blog_type": flag})
-      .then((response) => {
-          // setBlogList(response.data.body)
-          setboardData(<BlogList  data={response.data.body}/>)
-      });
-    }
-  } ,[flag])
+  // useEffect(()=>{
+  //   if(flag === "all"){
+  //     axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogList', {"blog_type": flag})
+  //     .then((response) => {
+  //         setBlogList(response.data.body)
+  //         setboardData(
+  //           <>
+  //           <News/>
+  //           <Pickup  data={response.data.body}/>
+  //           </>
+  //         )
+  //     });
+  //   }
+  //   else{
+  //     axios.post('https://72ib8ngtle.execute-api.ap-northeast-1.amazonaws.com/default/getBlogList', {"blog_type": flag})
+  //     .then((response) => {
+  //         // setBlogList(response.data.body)
+  //         setboardData(<BlogList  data={response.data.body}/>)
+  //     });
+  //   }
+  // } ,[flag])
 
     return(
       <Layout>
-      {boardData}
+      {/* {boardData} */}
+      test
       </Layout>
     )
 }
