@@ -98,6 +98,7 @@ export default function UmaMusu2() {
     <div className="discription">育成ウマ娘との相性順にソートされます。</div>
     <div className="drop_data" id="drop_data">
       {UmaList}
+      <div className="scrole_zone">スクロール→</div>
     </div>
     </DndProvider>
     </Layout>
