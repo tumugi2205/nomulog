@@ -98,13 +98,32 @@ hr{
 
 
 @media screen and (max-width: 1400px) {
-    
-.lineage_block > div > div > img{
-    margin-top: -13px !important;
-    margin-left: -13px !important;
-    width: 75px;
-    height: 75px;
-}
+    .point_view{
+        font-size: 1.5rem;
+    }
+    .drop_data{
+        white-space: nowrap;
+        max-height: 125px;
+        max-width: none;
+        overflow-y: hidden;
+        overflow-x: scroll;
+    }
+    .scrollbox::-webkit-scrollbar {
+        background:#ccc;
+        width:10px;
+      }
+      .scrollbox::-webkit-scrollbar-thumb {
+        background:#aaa;
+        border-radius: 50px;
+        height: 50px;
+      }
+
+    .lineage_block > div > div > img{
+        margin-top: -13px !important;
+        margin-left: -13px !important;
+        width: 75px;
+        height: 75px;
+    }
     .border{
         width: 150px;
         margin: auto;
@@ -117,7 +136,7 @@ hr{
     
     .ver{
         width: 0vh;
-        height:60px;
+        height:20px;
     }
     .hol{
         width: 150px;
