@@ -29,11 +29,7 @@ form{
     margin-top: 5vh;
 }
 .drop_data{
-    white-space: nowrap;
-    max-height: 125px;
-    max-width: none;
-    overflow-y: hidden;
-    overflow-x: scroll;
+    width: 100%;
 }
 
 .uma_image{
@@ -97,6 +93,11 @@ hr{
 }
 
 
+@media screen and (min-width: 1400px) {
+    .scrole_zone{
+        display: none;
+    }
+}
 @media screen and (max-width: 1400px) {
     .point_view{
         font-size: 1.5rem;
@@ -109,6 +110,7 @@ hr{
         overflow-x: scroll;
     }
     .scrole_zone{
+        display: visible;
         height: 25px;
         width: auto;
         color: rgb(255, 255, 255);
