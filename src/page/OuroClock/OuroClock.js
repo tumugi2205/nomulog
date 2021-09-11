@@ -26,7 +26,7 @@ const OuroClock = () => {
 
 <img
   className="background"
-  src={`./images/background.png`}
+  src={`./images/background2.png`}
   key="background"/>
   <div className="ouroclock_area">
     <img
