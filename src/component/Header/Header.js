@@ -27,6 +27,10 @@ function Header({ setflag }){
               {/* <div className="umamusu" onClick={()=>{setflag("umamusu")}}>ウマ娘</div> */}
               <div className="umamusu">ウマ娘</div>
             </Link>
+            <Link to='/ouroclock'>
+              {/* <div className="umamusu" onClick={()=>{setflag("umamusu")}}>ウマ娘</div> */}
+              <div className="umamusu">オーロ・クロック</div>
+            </Link>
               <div className="blog_search"><i className="fa fa-search" /><input type="text"/></div>
           </div>
         </header>

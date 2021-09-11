@@ -3,8 +3,11 @@ import "./App.css"
 import Home from '../Home/Home'
 import Items from '../Items/Items';
 import UmaMusu2 from '../UmaMusu2/UmaMusu2'
+import OuroClock from "../OuroClock/OuroClock";
 import { HashRouter, Router, Route, Switch } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
+
+
 export default function App(){
     return (
         <BrowserRouter>
@@ -12,6 +15,7 @@ export default function App(){
                 <Route path='/' exact component={Home}/>
                 <Route path='/blog_item/:id' exact component={Items}/>
                 <Route path='/umamusu' exact component={UmaMusu2}/>
+                <Route path='/ouroclock' exact component={OuroClock}/>
             </Switch>
         </BrowserRouter>
         );

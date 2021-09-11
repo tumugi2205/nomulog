@@ -11,6 +11,7 @@ export const Twitter = () => {
       const s = document.createElement("script");
       s.setAttribute("src", "https://platform.twitter.com/widgets.js");
       document.body.appendChild(s);
+      isLoadwidgets = true;
     }
   }, []);
   return (

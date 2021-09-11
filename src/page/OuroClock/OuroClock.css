@@ -1,0 +1,31 @@
+.ouro{
+  padding-top: 15rem;
+  padding-left: 10rem;
+  position: absolute;
+  z-index: 99;
+}
+.second {
+  margin-left: 16rem;
+  margin-top: -9rem;
+  z-index: 3;
+    animation: rotation-s 60s linear infinite; /* 60秒かけて一周 */
+    position: absolute;
+    width: 450px;
+}
+.minute {
+  margin-left: 17rem;
+  margin-top: -5rem;
+  z-index: 3;
+    animation: rotation-m 3600s linear infinite; /* 60秒かけて一周 */
+    position: absolute;
+    width: 400px;
+}
+
+.hour {
+  margin-left: 24rem;
+  margin-top: 6rem;
+  z-index: 4;
+    animation: rotation-h 86400s linear infinite; /* 60秒かけて一周 */
+    position: absolute;
+    width: 200px;
+}
